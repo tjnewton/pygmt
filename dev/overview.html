@@ -26,13 +26,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -41,14 +39,16 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installing" href="install.html" />
-    <link rel="prev" title="Disclaimer" href="index.html" />
+    <link rel="prev" title="Why PyGMT?" href="index.html" />
     <!-- Google Analytics tracking code -->
     <!-- See https://developers.google.com/analytics/devguides/collection/analyticsjs/ for documentation. -->
     <!-- 'storage': 'none' disables cookies -->
@@ -62,6 +62,10 @@
       ga('set', 'anonymizeIp', true);
       ga('send', 'pageview');
     </script>
+
+    <!-- Documentation switcher -->
+    <!-- Point to the *dev* version switcher. This will allow the latest versions to appear on older documentation. -->
+    <script type="text/javascript" src="/dev/_static/version_switch.js"></script>
 
 </head>
 
@@ -113,7 +117,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/first-figure.html">Making your first figure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/first_figure.html">Making your first figure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gallery/index.html">Gallery</a></li>
 </ul>
 <p class="caption"><span class="caption-text">User Guide</span></p>
@@ -121,7 +125,16 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorials/frames.html">Frames, ticks, titles, and labels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projections/index.html">Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/coastlines.html">Coastlines and borders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/regions.html">Setting the region</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/plot.html">Plotting data points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/lines.html">Plotting lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/text.html">Plotting text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/contour_map.html">Creating a map with contour lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/earth_relief.html">Plotting Earth relief</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/3d_perspective_image.html">Creating a 3D perspective image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/insets.html">Adding an inset to the figure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/subplots.html">Making subplots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/configuration.html">Configuring PyGMT defaults</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference documentation</span></p>
 <ul>
@@ -203,7 +216,6 @@
                    class="fa fa-github"> Improve this page</a>
             
         
-        
     </li>
 
   </ul>
@@ -214,31 +226,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="overview">
+  <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
@@ -261,13 +249,24 @@ files and get only the more convenient formats like PDF and PNG.</p>
 <p>The project was started in 2017 by <a class="reference external" href="http://www.leouieda.com">Leonardo Uieda</a>
 and <a class="reference external" href="http://www.soest.hawaii.edu/wessel">Paul Wessel</a> (the co-creator and main
 developer of GMT) at the University of Hawaii at Manoa.
-The development of PyGMT was funded by
-<a class="reference external" href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1558403">NSF grant OCE-1558403</a>.</p>
+The development of PyGMT has been supported by NSF grants
+<a class="reference external" href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1558403">OCE-1558403</a> and
+<a class="reference external" href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1948602">EAR-1948603</a>.</p>
 </div>
 <div class="section" id="presentations">
 <h2>Presentations<a class="headerlink" href="#presentations" title="Permalink to this headline">¶</a></h2>
 <p>These are conference presentations about the development of PyGMT (previously
 “GMT/Python”):</p>
+<ul class="simple">
+<li><p>“Remote Online Sessions for Emerging Seismologists (ROSES): Unit 8 - PyGMT”.
+2020.
+Liam Toney.
+Presented at <em>ROSES 2020</em>.
+url: <a class="reference external" href="https://www.iris.edu/hq/inclass/lesson/728">https://www.iris.edu/hq/inclass/lesson/728</a></p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference external image-reference" href="https://www.youtube.com/watch?v=SSIGJEe0BIk"><img alt="ROSES 2020 youtube video" src="https://img.youtube.com/vi/SSIGJEe0BIk/maxresdefault.jpg" style="width: 80%;" /></a>
+</div>
 <ul class="simple">
 <li><p>“PyGMT: Accessing the Generic Mapping Tools from Python”.
 2019.
@@ -276,17 +275,17 @@ Presented at <em>AGU 2019</em>.
 doi:<a class="reference external" href="https://doi.org/10.6084/m9.figshare.11320280">10.6084/m9.figshare.11320280</a></p></li>
 </ul>
 <div class="figure align-center">
-<a class="reference external image-reference" href="https://doi.org/10.6084/m9.figshare.11320280"><img alt="AGU 2019 poster on figshare" src="_images/agu2019-poster.jpg" /></a>
+<a class="reference external image-reference" href="https://doi.org/10.6084/m9.figshare.11320280"><img alt="AGU 2019 poster on figshare" src="_images/agu2019-poster.jpg" style="width: 80%;" /></a>
 </div>
 <ul class="simple">
 <li><p>“Building an object-oriented Python interface for the Generic Mapping Tools”.
 2018.
 Leonardo Uieda and Paul Wessel.
-Presented at <em>Scipy 2018</em>.
+Presented at <em>SciPy 2018</em>.
 doi:<a class="reference external" href="https://doi.org/10.6084/m9.figshare.6814052">10.6084/m9.figshare.6814052</a></p></li>
 </ul>
 <div class="figure align-center">
-<a class="reference external image-reference" href="https://www.youtube.com/watch?v=6wMtfZXfTRM"><img alt="Scipy youtube video" src="_images/scipy2018-youtube-thumbnail.png" /></a>
+<a class="reference external image-reference" href="https://www.youtube.com/watch?v=6wMtfZXfTRM"><img alt="SciPy youtube video" src="_images/scipy2018-youtube-thumbnail.png" style="width: 80%;" /></a>
 </div>
 <ul class="simple">
 <li><p>“Integrating the Generic Mapping Tools with the Scientific Python Ecosystem”.
@@ -296,17 +295,17 @@ Presented at <em>AOGS Annual Meeting 2018</em>.
 doi:<a class="reference external" href="https://doi.org/10.6084/m9.figshare.6399944">10.6084/m9.figshare.6399944</a></p></li>
 </ul>
 <div class="figure align-center">
-<a class="reference external image-reference" href="https://doi.org/10.6084/m9.figshare.6399944"><img alt="AOGS poster on figshare" src="_images/aogs2018-poster.jpg" /></a>
+<a class="reference external image-reference" href="https://doi.org/10.6084/m9.figshare.6399944"><img alt="AOGS poster on figshare" src="_images/aogs2018-poster.jpg" style="width: 80%;" /></a>
 </div>
 <ul class="simple">
 <li><p>“Bringing the Generic Mapping Tools to Python”.
 2017.
 Leonardo Uieda and Paul Wessel.
-Presented at <em>Scipy 2017</em>.
+Presented at <em>SciPy 2017</em>.
 doi:<a class="reference external" href="https://doi.org/10.6084/m9.figshare.7635833">10.6084/m9.figshare.7635833</a></p></li>
 </ul>
 <div class="figure align-center">
-<a class="reference external image-reference" href="https://www.youtube.com/watch?v=93M4How7R24"><img alt="Scipy youtube video" src="_images/scipy2017-youtube-thumbnail.png" /></a>
+<a class="reference external image-reference" href="https://www.youtube.com/watch?v=93M4How7R24"><img alt="SciPy youtube video" src="_images/scipy2017-youtube-thumbnail.png" style="width: 80%;" /></a>
 </div>
 <ul class="simple">
 <li><p>“A modern Python interface for the Generic Mapping Tools”.
@@ -316,7 +315,7 @@ Presented at <em>AGU 2017</em>.
 doi:<a class="reference external" href="https://doi.org/10.6084/m9.figshare.5662411">10.6084/m9.figshare.5662411</a></p></li>
 </ul>
 <div class="figure align-center">
-<a class="reference external image-reference" href="https://doi.org/10.6084/m9.figshare.5662411"><img alt="AGU 2017 poster on figshare" src="_images/agu2017-poster.jpg" /></a>
+<a class="reference external image-reference" href="https://doi.org/10.6084/m9.figshare.5662411"><img alt="AGU 2017 poster on figshare" src="_images/agu2017-poster.jpg" style="width: 80%;" /></a>
 </div>
 </div>
 </div>
@@ -333,7 +332,7 @@ doi:<a class="reference external" href="https://doi.org/10.6084/m9.figshare.5662
         <a href="install.html" class="btn btn-neutral float-right" title="Installing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Disclaimer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Why PyGMT?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -342,10 +341,10 @@ doi:<a class="reference external" href="https://doi.org/10.6084/m9.figshare.5662
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2020, The PyGMT Developers.
+        &copy; Copyright 2017-2021, The PyGMT Developers.
       
         <span class="commit">
-          Revision <code><a href="https://github.com/GenericMappingTools/pygmt/commit/bedb48d5cf105c37573f8e8c5d74b97f1f741187">bedb48d</a></code>.
+          Revision <code><a href="https://github.com/GenericMappingTools/pygmt/commit/e4cb775">e4cb775</a></code>.
         </span>
       
 

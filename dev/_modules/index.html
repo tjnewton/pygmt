@@ -26,13 +26,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -41,10 +39,12 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <!-- Google Analytics tracking code -->
@@ -60,6 +60,10 @@
       ga('set', 'anonymizeIp', true);
       ga('send', 'pageview');
     </script>
+
+    <!-- Documentation switcher -->
+    <!-- Point to the *dev* version switcher. This will allow the latest versions to appear on older documentation. -->
+    <script type="text/javascript" src="/dev/_static/version_switch.js"></script>
 
 </head>
 
@@ -107,7 +111,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/first-figure.html">Making your first figure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/first_figure.html">Making your first figure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Gallery</a></li>
 </ul>
 <p class="caption"><span class="caption-text">User Guide</span></p>
@@ -115,7 +119,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/frames.html">Frames, ticks, titles, and labels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../projections/index.html">Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/coastlines.html">Coastlines and borders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/regions.html">Setting the region</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/plot.html">Plotting data points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/lines.html">Plotting lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/text.html">Plotting text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/contour_map.html">Creating a map with contour lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/earth_relief.html">Plotting Earth relief</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/3d_perspective_image.html">Creating a 3D perspective image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/insets.html">Adding an inset to the figure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/subplots.html">Making subplots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configuration.html">Configuring PyGMT defaults</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference documentation</span></p>
 <ul>
@@ -192,7 +205,6 @@
     
     <li class="source-link">
         
-        
     </li>
 
   </ul>
@@ -205,18 +217,42 @@
             
   <h1>All modules for which code is available</h1>
 <ul><li><a href="pygmt.html">pygmt</a></li>
-<ul><li><a href="pygmt/base_plotting.html">pygmt.base_plotting</a></li>
+<ul><li><a href="pygmt/accessors.html">pygmt.accessors</a></li>
 <li><a href="pygmt/clib/session.html">pygmt.clib.session</a></li>
 <li><a href="pygmt/datasets/earth_relief.html">pygmt.datasets.earth_relief</a></li>
-<li><a href="pygmt/datasets/tutorial.html">pygmt.datasets.tutorial</a></li>
+<li><a href="pygmt/datasets/samples.html">pygmt.datasets.samples</a></li>
 <li><a href="pygmt/exceptions.html">pygmt.exceptions</a></li>
 <li><a href="pygmt/figure.html">pygmt.figure</a></li>
-<li><a href="pygmt/filtering.html">pygmt.filtering</a></li>
-<li><a href="pygmt/gridding.html">pygmt.gridding</a></li>
-<li><a href="pygmt/gridops.html">pygmt.gridops</a></li>
-<li><a href="pygmt/mathops.html">pygmt.mathops</a></li>
-<li><a href="pygmt/modules.html">pygmt.modules</a></li>
-<li><a href="pygmt/sampling.html">pygmt.sampling</a></li>
+<li><a href="pygmt/src/basemap.html">pygmt.src.basemap</a></li>
+<li><a href="pygmt/src/blockm.html">pygmt.src.blockm</a></li>
+<li><a href="pygmt/src/coast.html">pygmt.src.coast</a></li>
+<li><a href="pygmt/src/colorbar.html">pygmt.src.colorbar</a></li>
+<li><a href="pygmt/src/config.html">pygmt.src.config</a></li>
+<li><a href="pygmt/src/contour.html">pygmt.src.contour</a></li>
+<li><a href="pygmt/src/grd2cpt.html">pygmt.src.grd2cpt</a></li>
+<li><a href="pygmt/src/grdcontour.html">pygmt.src.grdcontour</a></li>
+<li><a href="pygmt/src/grdcut.html">pygmt.src.grdcut</a></li>
+<li><a href="pygmt/src/grdfilter.html">pygmt.src.grdfilter</a></li>
+<li><a href="pygmt/src/grdimage.html">pygmt.src.grdimage</a></li>
+<li><a href="pygmt/src/grdinfo.html">pygmt.src.grdinfo</a></li>
+<li><a href="pygmt/src/grdtrack.html">pygmt.src.grdtrack</a></li>
+<li><a href="pygmt/src/grdview.html">pygmt.src.grdview</a></li>
+<li><a href="pygmt/src/image.html">pygmt.src.image</a></li>
+<li><a href="pygmt/src/info.html">pygmt.src.info</a></li>
+<li><a href="pygmt/src/inset.html">pygmt.src.inset</a></li>
+<li><a href="pygmt/src/legend.html">pygmt.src.legend</a></li>
+<li><a href="pygmt/src/logo.html">pygmt.src.logo</a></li>
+<li><a href="pygmt/src/makecpt.html">pygmt.src.makecpt</a></li>
+<li><a href="pygmt/src/meca.html">pygmt.src.meca</a></li>
+<li><a href="pygmt/src/plot.html">pygmt.src.plot</a></li>
+<li><a href="pygmt/src/plot3d.html">pygmt.src.plot3d</a></li>
+<li><a href="pygmt/src/solar.html">pygmt.src.solar</a></li>
+<li><a href="pygmt/src/subplot.html">pygmt.src.subplot</a></li>
+<li><a href="pygmt/src/surface.html">pygmt.src.surface</a></li>
+<li><a href="pygmt/src/text.html">pygmt.src.text</a></li>
+<li><a href="pygmt/src/which.html">pygmt.src.which</a></li>
+<li><a href="pygmt/src/x2sys_cross.html">pygmt.src.x2sys_cross</a></li>
+<li><a href="pygmt/src/x2sys_init.html">pygmt.src.x2sys_init</a></li>
 </ul></ul>
 
            </div>
@@ -230,10 +266,10 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2020, The PyGMT Developers.
+        &copy; Copyright 2017-2021, The PyGMT Developers.
       
         <span class="commit">
-          Revision <code><a href="https://github.com/GenericMappingTools/pygmt/commit/bedb48d5cf105c37573f8e8c5d74b97f1f741187">bedb48d</a></code>.
+          Revision <code><a href="https://github.com/GenericMappingTools/pygmt/commit/e4cb775">e4cb775</a></code>.
         </span>
       
 

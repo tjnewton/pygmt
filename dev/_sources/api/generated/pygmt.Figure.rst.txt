@@ -44,6 +44,10 @@ pygmt.Figure
     
     
     
+    Figure.inset
+    
+    
+    
     Figure.legend
     
     
@@ -52,7 +56,15 @@ pygmt.Figure
     
     
     
+    Figure.meca
+    
+    
+    
     Figure.plot
+    
+    
+    
+    Figure.plot3d
     
     
     
@@ -64,11 +76,23 @@ pygmt.Figure
     
     
     
+    Figure.set_panel
+    
+    
+    
     Figure.shift_origin
     
     
     
     Figure.show
+    
+    
+    
+    Figure.solar
+    
+    
+    
+    Figure.subplot
     
     
     
